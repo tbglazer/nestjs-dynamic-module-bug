@@ -4,7 +4,9 @@ import { AppService } from './app.service';
 import { ConfigModule } from './config/config.module';
 
 @Module({
-  imports: [ConfigModule.registerAsync({
+  imports: [
+    ConfigModule.register({folder: './config'}),
+    ConfigModule.registerAsync({
       useFactory: () => {
         return {
           folder: './config',
