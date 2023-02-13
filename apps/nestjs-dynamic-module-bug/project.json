@@ -1,0 +1,61 @@
+{
+  "name": "nestjs-dynamic-module-bug",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/nestjs-dynamic-module-bug/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/nestjs-dynamic-module-bug",
+        "main": "apps/nestjs-dynamic-module-bug/src/main.ts",
+        "tsConfig": "apps/nestjs-dynamic-module-bug/tsconfig.app.json",
+        "assets": ["apps/nestjs-dynamic-module-bug/src/assets"],
+        "webpackConfig": "apps/nestjs-dynamic-module-bug/webpack.config.js"
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/js:node",
+      "options": {
+        "buildTarget": "nestjs-dynamic-module-bug:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "nestjs-dynamic-module-bug:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/nestjs-dynamic-module-bug/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/nestjs-dynamic-module-bug/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": []
+}
